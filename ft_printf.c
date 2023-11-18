@@ -1,22 +1,23 @@
 #include "libftprintf.h"
 
-void	switcher(char *str, int *i, int *len)
+void	switcher(const char *str, va_list params, int *i, int *len)
 {
 	*i += 1;
 	if (str[*i] == 'c')
-		ft_lputchar(va_arg(params, int));
+		*len += ft_lputchar(va_arg(params, int));
 	else if (str[*i] == 's')
-		*len += (ft_lputstr(va_arg(params, char *)) - 1);
-	//else if (str[i] == 'p')
-	//	ft_printhex(va_arg(params, void *);
+		*len += ft_lputstr(va_arg(params, char *));
+	else if (str[*i] == 'p')
+		*len += ft_print_mem(va_arg(params, void *), sizeof(*void));
 	else
 	{
 		ft_lputchar(str[--*i]);
 		ft_lputchar(str[++*i]);
+		*len += 2;
 	}
 }
 
-int	manage_args(const char *str, va_list  params)
+int	manage_args(const char *str, va_list params)
 {
 	int		i;
 	int		len;
@@ -26,12 +27,12 @@ int	manage_args(const char *str, va_list  params)
 	while (str[i])
 	{
 		if (str[i] == '%')
-			switcher(str, &i, &len);
+			switcher(str, params, &i, &len);
 		else
-			ft_lputchar(str[i]);
+			len += ft_lputchar(str[i]);
 		i++;
 	}
-	return (i + len);
+	return (len);
 }
 
 int	ft_printf(const char *format, ...)

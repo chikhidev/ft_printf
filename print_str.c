@@ -8,10 +8,18 @@ int	ft_lputchar(int c)
 
 int	ft_lputstr(char *str)
 {
-	int i;
+	int	i;
 
+	if (str == NULL)
+	{
+		write(1, "(null)", 6);
+		return (6);
+	}
 	i = 0;
 	while (str[i])
-		ft_lputchar(str[i++]);
+	{
+		ft_lputchar(str[i]);
+		i++;
+	}
 	return (i);
 }
