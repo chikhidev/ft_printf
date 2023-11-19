@@ -8,7 +8,7 @@ void	switcher(const char *str, va_list params, int *i, int *len)
 	else if (str[*i] == 's')
 		*len += ft_lputstr(va_arg(params, char *));
 	else if (str[*i] == 'p')
-		*len += ft_print_mem(va_arg(params, void *), sizeof(*void));
+		*len += ft_print_mem(va_arg(params, void *));
 	else
 	{
 		ft_lputchar(str[--*i]);
@@ -19,8 +19,8 @@ void	switcher(const char *str, va_list params, int *i, int *len)
 
 int	manage_args(const char *str, va_list params)
 {
-	int		i;
-	int		len;
+	int	i;
+	int	len;
 
 	i = 0;
 	len = 0;
@@ -37,8 +37,8 @@ int	manage_args(const char *str, va_list params)
 
 int	ft_printf(const char *format, ...)
 {
-	int			len;
-	va_list		params;
+	int		len;
+	va_list	params;
 
 	va_start(params, format);
 	len = manage_args(format, params);

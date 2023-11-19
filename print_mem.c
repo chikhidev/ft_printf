@@ -1,28 +1,33 @@
 #include "libftprintf.h"
 
-static char	hex_converter(int to_convert)
+static int	hex_converter(unsigned char to_convert, int to_upper)
 {
-	const char	base[] = "0123456789abcdef";
+	const char	*base = "0123456789abcdef";
 
-	return (base[to_convert]);
+	ft_lputchar(base[(to_convert >> 4) & 0xF]);
+	ft_lputchar(base[to_convert & 0xF]);
+	return (2);
 }
 
-int	ft_print_mem(void *ptr, size_t size)
+// nibble
+int	ft_print_mem(void *ptr)
 {
-	size_t i;
-	unsigned char *byte;
-	int len_tracker;
+	unsigned char	*address;
+	int				i;
+	int				size;
+	int				len;
 
-	if (!ptr)
+	if (ptr == NULL)
 		return (ft_lputstr("0x0"));
-	byte = (unsigned char *)ptr;
-	i = size;
-	len_tracker = ft_lputstr("0x");
-	while (i > 0)
+	address = (unsigned char *)ptr;
+	i = 0;
+	size = sizeof(void *) - 1;
+	len = ft_lputstr("0x");
+	while (i < size)
 	{
-		len_tracker += ft_lputchar(hex_converter(byte[i] >> 4));
-		len_tracker += ft_lputchar(hex_converter(byte[i] & 0xf));
-		i--;
+		printf("\npassed%d\n", i);
+		len += hex_converter((unsigned char)address[i], 0);
+		i++;
 	}
-	return (len_tracker);
+	return (len);
 }
