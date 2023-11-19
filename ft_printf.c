@@ -21,12 +21,12 @@ void	switcher(const char *str, va_list params, int *i, int *len)
 		*len += ft_lputstr(va_arg(params, char *));
 	else if (str[*i] == 'p')
 		*len += ft_print_hex((uintptr_t)va_arg(params, void *), 1);
+	else if (str[*i] == 'd' || str[*i] == 'i')
+		*len += ft_print_dig(va_arg(params, int));
+	else if (str[*i] == 'u')
+		*len += ft_print_uns(va_arg(params, unsigned int));
 	else
-	{
-		ft_lputchar(str[--*i]);
-		ft_lputchar(str[++*i]);
-		*len += 2;
-	}
+		*len += ft_lputchar(str[*i - 1]) + ft_lputchar(str[*i]);
 }
 
 int	manage_args(const char *str, va_list params)
