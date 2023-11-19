@@ -1,4 +1,4 @@
-#include "libftprintf.h"
+#include "ft_printf.h"
 
 void	switcher(const char *str, va_list params, int *i, int *len)
 {
@@ -8,7 +8,7 @@ void	switcher(const char *str, va_list params, int *i, int *len)
 	else if (str[*i] == 's')
 		*len += ft_lputstr(va_arg(params, char *));
 	else if (str[*i] == 'p')
-		*len += ft_print_mem(va_arg(params, void *));
+		*len += ft_print_hex((uintptr_t)va_arg(params, void *), 1);
 	else
 	{
 		ft_lputchar(str[--*i]);
