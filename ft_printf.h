@@ -5,13 +5,6 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-/*libft functions*/
-size_t	ft_strlen(const char *str);
-char	*ft_strdup(const char *s1);
-void	*ft_memcpy(void *dst, const void *src, size_t n);
-char	*ft_itoa(int n);
-char	*ft_uitoa(unsigned int n);
-
 /*utils*/
 int		ft_lputchar(int c);
 int		ft_lputstr(char *str);
