@@ -1,4 +1,3 @@
-#include "../ft_printf.h"
 #include "test.h"
 
 int	main(void)

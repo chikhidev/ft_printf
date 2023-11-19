@@ -1,5 +1,4 @@
 #include "../ft_printf.h"
-#include <stdlib.h>
 
 static int	ft_intlen(int n)
 {
