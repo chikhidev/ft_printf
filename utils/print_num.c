@@ -31,6 +31,11 @@ int	ft_print_dig(int digit)
 	int	len;
 
 	len = 0;
+	if (digit < 0)
+	{
+		len += ft_lputchar('-');
+		digit *= -1;
+	}
 	ft_putnbr_rec(digit, &len);
 	return (len);
 }

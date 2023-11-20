@@ -10,8 +10,8 @@ bool compare_results(int len1, int len2) {
 
 void print_result(bool passed) {
     if (passed) {
-        printf(ANSI_COLOR_GREEN "Passed\n" ANSI_COLOR_RESET);
+        printf("\t\t\t\tPassed\n\n");
     } else {
-        printf(ANSI_COLOR_RED "Failed\n" ANSI_COLOR_RESET);
+        printf("\t\t\t\tFailed\n\n");
     }
 }
