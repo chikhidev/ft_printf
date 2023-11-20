@@ -29,6 +29,8 @@ void	switcher(const char *str, va_list params, int *i, int *len)
 		*len += ft_print_hex((int)va_arg(params, int), 0);
 	else if (str[*i] == 'X')
 		*len += ft_print_hex((int)va_arg(params, int), 1);
+	else if (str[*i] == '%')
+		*len += ft_lputchar('%');
 	else
 		*len += ft_lputchar(str[*i - 1]) + ft_lputchar(str[*i]);
 }

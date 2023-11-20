@@ -1,5 +1,5 @@
 run() {
-    cc ft_printf.c utils/*.c tests/"$1".test.c && ./a.out
+    cc ft_printf.c utils/*.c tests/"$1".test.c -o exec/"$1".output && ./exec/"$1".output
 }
 
 push(){
