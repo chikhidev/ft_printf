@@ -5,10 +5,9 @@
 void run_tests(void) {
     int f_len, o_len;
 
-    // Test Case 1
-    f_len = ft_printf("1. sign: %t you");
+    f_len = ft_printf("1. sign: %% you");
     printf("\n");
-    o_len = printf("1. sign: %t you");
+    o_len = printf("1. sign: %% you");
     printf("\n");
     printf("---------------------------\n");
     printf("got len = %d\n", f_len);
@@ -18,9 +17,6 @@ void run_tests(void) {
     else
         printf(ANSI_COLOR_RED "Failed\n" ANSI_COLOR_RESET);
     printf("---------------------------\n");
-
-    // Add more test cases...
-
 }
 
 int main(void) {

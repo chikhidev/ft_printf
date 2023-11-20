@@ -27,14 +27,11 @@ int	ft_lputstr(char *str)
 		write(1, "(null)", 6);
 		return (6);
 	}
-	if (*str)
+	i = 0;
+	while (str[i])
 	{
-		i = 0;
-		while (str[i])
-		{
-			ft_lputchar(str[i]);
-			i++;
-		}
+		ft_lputchar(str[i]);
+		i++;
 	}
 	return (i);
 }

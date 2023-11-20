@@ -24,7 +24,6 @@ static int	hex_converter(unsigned char to_convert, int to_upper)
 int	ft_print_hex(uintptr_t address, int upper_case)
 {
 	int			len;
-	uintptr_t	holder;
 
 	len = 0;
 	if (address > 15)
@@ -36,7 +35,6 @@ int	ft_print_hex(uintptr_t address, int upper_case)
 int	ft_print_mem(uintptr_t address)
 {
 	int			len;
-	uintptr_t	holder;
 
 	len = 0;
 	len += ft_lputstr("0x");

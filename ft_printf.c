@@ -64,6 +64,5 @@ int	ft_printf(const char *format, ...)
 
 	va_start(params, format);
 	len = manage_args(format, params);
-	va_end(params);
 	return (len);
 }
