@@ -1,3 +1,5 @@
+// :Stdh
+// :Stdh -
 #include "test.h"
 
 int	main(void)
