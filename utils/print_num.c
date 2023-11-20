@@ -7,6 +7,13 @@ static void	ft_putnbr_rec(int n, int *len)
 	*len += ft_lputchar(n % 10 + '0');
 }
 
+static void	ft_putnbr_un_rec(unsigned int n, int *len)
+{
+	if (n >= 10)
+		ft_putnbr_un_rec(n / 10, len);
+	*len += ft_lputchar(n % 10 + '0');
+}
+
 int	ft_print_dig(int digit)
 {
 	int	len;
@@ -14,13 +21,6 @@ int	ft_print_dig(int digit)
 	len = 0;
 	ft_putnbr_rec(digit, &len);
 	return (len);
-}
-
-static void	ft_putnbr_un_rec(unsigned int n, int *len)
-{
-	if (n >= 10)
-		ft_putnbr_un_rec(n / 10, len);
-	*len += ft_lputchar(n % 10 + '0');
 }
 
 int	ft_print_uns(unsigned int digit)
