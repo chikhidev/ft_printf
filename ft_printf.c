@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-void	switcher(const char *str, va_list params, int *i, int *len)
+static int	switcher(const char *str, va_list params, int *i, int *len)
 {
 	*i += 1;
 	if (str[*i] == 'c')
@@ -31,11 +31,12 @@ void	switcher(const char *str, va_list params, int *i, int *len)
 		*len += ft_print_hex((int)va_arg(params, int), 1);
 	else if (str[*i] == '%')
 		*len += ft_lputchar('%');
-	else
-		*len += ft_lputchar(str[*i - 1]) + ft_lputchar(str[*i]);
+	else if (str[*i] == '\0')
+		return (0);
+	return (1);
 }
 
-int	manage_args(const char *str, va_list params)
+static int	manage_args(const char *str, va_list params)
 {
 	int	i;
 	int	len;
@@ -45,7 +46,10 @@ int	manage_args(const char *str, va_list params)
 	while (str[i])
 	{
 		if (str[i] == '%')
-			switcher(str, params, &i, &len);
+		{
+			if (switcher(str, params, &i, &len) == 0)
+				break ;
+		}
 		else
 			len += ft_lputchar(str[i]);
 		i++;
