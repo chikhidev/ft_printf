@@ -1,4 +1,8 @@
 test() {
+    if [ ! -d "exec" ]; then
+        mkdir exec
+    fi
+
     if [[ $2 -eq 1 ]]; then
         gcc -Wall -Wextra -Werror ft_printf.c utils/*.c tests/${1}.test.c -o exec/${1}.output && ./exec/${1}.output
     else
