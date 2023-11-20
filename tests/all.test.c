@@ -31,10 +31,6 @@ int main(void)
     len2 = printf("Unsigned:[%u]\n", ui);
     print_result(compare_results(len, len2));
 
-    len = ft_printf("Unsigned octal:[%o]\n", ui);
-    len2 = printf("Unsigned octal:[%o]\n", ui);
-    print_result(compare_results(len, len2));
-
     len = ft_printf("Unsigned hexadecimal:[%x, %X]\n", ui, ui);
     len2 = printf("Unsigned hexadecimal:[%x, %X]\n", ui, ui);
     print_result(compare_results(len, len2));
@@ -57,6 +53,10 @@ int main(void)
 
     len = ft_printf("Unknown:[%r]\n");
     len2 = printf("Unknown:[%r]\n");
+    print_result(compare_results(len, len2));
+
+    len = ft_printf("Unknown:[%%e]\n");
+    len2 = printf("Unknown:[%%e]\n");
     print_result(compare_results(len, len2));
 
     return (0);

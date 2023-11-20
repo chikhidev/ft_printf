@@ -26,13 +26,15 @@ static int	switcher(const char *str, va_list params, int *i, int *len)
 	else if (str[*i] == 'u')
 		*len += ft_print_uns(va_arg(params, unsigned int));
 	else if (str[*i] == 'x')
-		*len += ft_print_hex((int)va_arg(params, int), 0);
+		*len += ft_print_hex((unsigned)va_arg(params, int), 0);
 	else if (str[*i] == 'X')
-		*len += ft_print_hex((int)va_arg(params, int), 1);
+		*len += ft_print_hex((unsigned)va_arg(params, int), 1);
 	else if (str[*i] == '%')
 		*len += ft_lputchar('%');
 	else if (str[*i] == '\0')
 		return (0);
+	else
+		*len += ft_lputchar(str[*i]);
 	return (1);
 }
 
