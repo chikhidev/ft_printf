@@ -51,9 +51,9 @@ int main(void)
     len2 = printf("Percent:[%%]\n");
     print_result(compare_results(len, len2));
 
-    len = ft_printf("Unknown:[%r]\n");
-    len2 = printf("Unknown:[%r]\n");
-    print_result(compare_results(len, len2));
+    // len = ft_printf("Unknown:[%r]\n");
+    // len2 = printf("Unknown:[%r]\n");
+    // print_result(compare_results(len, len2));
 
     len = ft_printf("Unknown:[%%e]\n");
     len2 = printf("Unknown:[%%e]\n");

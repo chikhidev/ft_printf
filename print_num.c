@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../ft_printf.h"
+#include "ft_printf.h"
 
-static void	ft_putnbr_rec(int n, int *len)
+static void	ft_putnbr_rec(long n, int *len)
 {
 	if (n >= 10)
 		ft_putnbr_rec(n / 10, len);
@@ -29,14 +29,16 @@ static void	ft_putnbr_un_rec(unsigned int n, int *len)
 int	ft_print_dig(int digit)
 {
 	int	len;
+	long n;
 
+	n = (long)digit;
 	len = 0;
-	if (digit < 0)
+	if (n < 0)
 	{
 		len += ft_lputchar('-');
-		digit *= -1;
+		n *= -1;
 	}
-	ft_putnbr_rec(digit, &len);
+	ft_putnbr_rec(n, &len);
 	return (len);
 }
 

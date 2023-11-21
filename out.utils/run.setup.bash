@@ -4,9 +4,9 @@ test() {
     fi
 
     if [[ $2 -eq 1 ]]; then
-        gcc -Wall -Wextra -Werror ft_printf.c utils/*.c tests/${1}.test.c -o exec/${1}.output && ./exec/${1}.output
+        gcc -Wall -Wextra -Werror *.c tests/${1}.test.c -o exec/${1}.output && ./exec/${1}.output
     else
-        gcc ft_printf.c utils/*.c tests/${1}.test.c tests/test.c -o exec/${1}.output && ./exec/${1}.output | cat -e
+        gcc *.c tests/${1}.test.c tests/test.c -o exec/${1}.output && ./exec/${1}.output | cat -e
     fi
 }
 
@@ -14,17 +14,13 @@ testlib() {
     if [ ! -d "exec" ]; then
         mkdir exec
     fi
-
     if [ ! -f "libftprintf.a" ]; then
-        echo "There is no libftprintf.a file!"
-        echo "Trying to make..."
         make
     fi
-
-    if [[ $2 -eq 1 ]]; then
-        gcc -Wall -Wextra -Werror tests/${1}.test.c tests/test.c libftprintf.a -o exec/${1}.output && ./exec/${1}.output
+    if [[ "$2" -eq 1 ]]; then
+        gcc -Wall -Wextra -Werror tests/"${1}".test.c tests/test.c libftprintf.a -o exec/"${1}".output && ./exec/"${1}".output
     else
-        gcc tests/${1}.test.c tests/test.c libftprintf.a -o exec/${1}.output && ./exec/${1}.output | cat -e
+        gcc tests/"${1}".test.c tests/test.c libftprintf.a -o exec/"${1}".output && ./exec/"${1}".output | cat -e
     fi
 }
 
