@@ -1,9 +1,8 @@
 NAME = libftprintf.a
 SRC = ft_printf.c
 OBJ = ft_printf.o
-UTILS_DIR = utils
-UTILS_F = print_hex.c print_num.c print_str.c
-UOBJS = $(UTILS_DIR)/$(UTILS_F:%.c=%.o)
+UTILS = utils/print_str.c utils/print_num.c utils/print_hex.c
+UOBJS = $(UTILS:%.c=%.o)
 FLAGS = -Werror -Wextra -Wall
 
 all: $(NAME)
@@ -11,14 +10,15 @@ all: $(NAME)
 $(NAME): $(UOBJS) $(OBJ)
 	ar rcs $(NAME) $(UOBJS) $(OBJ)
 
-$(UTILS_DIR)/%.o: $(UTILS_DIR)/%.c
+$(UOBJS): $(UTILS)
 	cc $(FLAGS) -c $< -o $@
 
 $(OBJ): $(SRC)
 	cc $(FLAGS) -c $< -o $@
 
 clean:
-	rm -f $(UOBJS) $(OBJ)
+	rm -f $(UOBJS)
+	rm -f $(OBJ)
 
 fclean: clean
 	rm -f $(NAME)
