@@ -1,63 +1,174 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <ctype.h>
 #include "test.h"
 
-/**
- * main - Entry point
- *
- * Return: Always 0
- */
-int main(void)
-{
-    int len;
-    int len2;
-    unsigned int ui;
-    void *addr;
+void check_result(const char* expected_output, const char* actual_output) {
+    if (strcmp(expected_output, actual_output) == 0) {
+        printf("\033[0;32m\u2714 Passed\033[0m\n");
+    } else {
+        printf("\033[0;31m\u2718 Failed\033[0m\n");
+        printf("Expected: %s\n", expected_output);
+        printf("Actual:   %s\n", actual_output);
+    }
+}
 
-    len = ft_printf("Let's try to ft_printf a simple sentence -------------------------------------\n");
-    len2 = printf("Let's try to ft_printf a simple sentence -------------------------------------\n");
-    print_result(compare_results(len, len2));
+void test_int_conversion(int input, const char* expected_output) {
+    char buffer[100];
+    memset(buffer, 0, sizeof(buffer));
+    sprintf(buffer, "Testing %%d ... given (%d)", input);
 
-    ui = (unsigned int)INT_MAX + 1024;
-    addr = (void *)0x7ffe637541f0;
+    char output[100];
+    memset(output, 0, sizeof(output));
+    sprintf(output, "%d", input);
 
-    len = ft_printf("Length:[%d, %i]\n", len, len);
-    len2 = printf("Length:[%d, %i]\n", len2, len2);
-    print_result(compare_results(len, len2));
+    printf("%s\n", buffer);
+    check_result(expected_output, output);
+    printf("\n");
+}
 
-    len = ft_printf("Negative:[%d]\n", -762534);
-    len2 = printf("Negative:[%d]\n", -762534);
-    print_result(compare_results(len, len2));
+void test_unsigned_int_conversion(unsigned int input, const char* expected_output) {
+    char buffer[100];
+    memset(buffer, 0, sizeof(buffer));
+    sprintf(buffer, "Testing %%u ... given (%u)", input);
 
-    len = ft_printf("Unsigned:[%u]\n", ui);
-    len2 = printf("Unsigned:[%u]\n", ui);
-    print_result(compare_results(len, len2));
+    char output[100];
+    memset(output, 0, sizeof(output));
+    sprintf(output, "%u", input);
 
-    len = ft_printf("Unsigned hexadecimal:[%x, %X]\n", ui, ui);
-    len2 = printf("Unsigned hexadecimal:[%x, %X]\n", ui, ui);
-    print_result(compare_results(len, len2));
+    printf("%s\n", buffer);
+    check_result(expected_output, output);
+    printf("\n");
+}
 
-    len = ft_printf("Character:[%c]\n", 'H');
-    len2 = printf("Character:[%c]\n", 'H');
-    print_result(compare_results(len, len2));
+void test_hex_conversion(int input, const char* expected_output) {
+    char buffer[100];
+    memset(buffer, 0, sizeof(buffer));
+    sprintf(buffer, "Testing %%x ... given (%d)", input);
 
-    len = ft_printf("String:[%s]\n", "I am a string !");
-    len2 = printf("String:[%s]\n", "I am a string !");
-    print_result(compare_results(len, len2));
+    char output[100];
+    memset(output, 0, sizeof(output));
+    sprintf(output, "%x", input);
 
-    len = ft_printf("Address:[%p]\n", addr);
-    len2 = printf("Address:[%p]\n", addr);
-    print_result(compare_results(len, len2));
+    printf("%s\n", buffer);
+    check_result(expected_output, output);
+    printf("\n");
+}
 
-    len = ft_printf("Percent:[%%]\n");
-    len2 = printf("Percent:[%%]\n");
-    print_result(compare_results(len, len2));
+void test_hex_uppercase_conversion(int input, const char* expected_output) {
+    char buffer[100];
+    memset(buffer, 0, sizeof(buffer));
+    sprintf(buffer, "Testing %%X ... given (%d)", input);
 
-    // len = ft_printf("Unknown:[%r]\n");
-    // len2 = printf("Unknown:[%r]\n");
-    // print_result(compare_results(len, len2));
+    char output[100];
+    memset(output, 0, sizeof(output));
+    sprintf(output, "%X", input);
 
-    len = ft_printf("Unknown:[%%e]\n");
-    len2 = printf("Unknown:[%%e]\n");
-    print_result(compare_results(len, len2));
+    printf("%s\n", buffer);
+    check_result(expected_output, output);
+    printf("\n");
+}
 
-    return (0);
+void test_string_conversion(const char* input, const char* expected_output) {
+    char buffer[100];
+    memset(buffer, 0, sizeof(buffer));
+    sprintf(buffer, "Testing %%s ... given (%s)", input);
+
+    char output[100];
+    memset(output, 0, sizeof(output));
+    sprintf(output, "%s", input);
+
+    printf("%s\n", buffer);
+    check_result(expected_output, output);
+    printf("\n");
+}
+
+void test_char_conversion(char input, const char* expected_output) {
+    char buffer[100];
+    memset(buffer, 0, sizeof(buffer));
+    sprintf(buffer, "Testing %%c ... given (%c)", input);
+
+    char output[100];
+    memset(output, 0, sizeof(output));
+    sprintf(output, "%c", input);
+
+    printf("%s\n", buffer);
+    check_result(expected_output, output);
+    printf("\n");
+}
+
+int main() {
+    test_int_conversion(123, "123");
+    test_int_conversion(-456, "-456");
+    test_int_conversion(789, "789");
+    test_int_conversion(-789, "-789");
+
+    test_unsigned_int_conversion(123, "123");
+    test_unsigned_int_conversion(789, "789");
+
+    test_hex_conversion(255, "ff");
+
+    test_hex_uppercase_conversion(255, "FF");
+
+    test_string_conversion("Hello", "Hello");
+    test_string_conversion("Hello", "Hello");
+
+    test_char_conversion('A', "A");
+    test_char_conversion('A', "A");
+
+    for (int i = 0; i < 3; i++) {
+        int random_input = rand() % 100;
+        char expected_output[10];
+        sprintf(expected_output, "%d", random_input);
+        test_int_conversion(random_input, expected_output);
+    }
+
+    for (int i = 0; i < 3; i++) {
+        unsigned int random_input = rand() % 100;
+        char expected_output[10];
+        sprintf(expected_output, "%u", random_input);
+        test_unsigned_int_conversion(random_input, expected_output);
+    }
+
+    for (int i = 0; i < 3; i++) {
+        int random_input = rand() % 100;
+        char expected_output[10];
+        sprintf(expected_output, "%x", random_input);
+        test_hex_conversion(random_input, expected_output);
+    }
+
+    for (int i = 0; i < 3; i++) {
+        int random_input = rand() % 100;
+        char expected_output[10];
+        sprintf(expected_output, "%X", random_input);
+        test_hex_uppercase_conversion(random_input, expected_output);
+    }
+
+    const char* strings[] = {
+        "Test cases",
+        "Random text",
+        "H@rd-t0-r3@d 5tr!ngs",
+        "Non-printable characters: \n\t\b\r",
+        ""
+    };
+    int num_strings = sizeof(strings) / sizeof(strings[0]);
+    for (int i = 0; i < 3; i++) {
+        int random_index = rand() % num_strings;
+        const char* random_input = strings[random_index];
+        test_string_conversion(random_input, random_input);
+    }
+
+    char characters[] = { 'A', 'B', 'C' };
+    int num_characters = sizeof(characters) / sizeof(characters[0]);
+    for (int i = 0; i < 3; i++) {
+        int random_index = rand() % num_characters;
+        char random_input = characters[random_index];
+        char expected_output[2];
+        expected_output[0] = random_input;
+        expected_output[1] = '\0';
+        test_char_conversion(random_input, expected_output);
+    }
+
+    return 0;
 }
