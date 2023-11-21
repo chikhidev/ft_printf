@@ -37,7 +37,7 @@ For detailed information about the supported format specifiers and usage example
 
 The repository provides the `test` and `testlib` functions to compile and run test cases. You can use these functions to test the functionality of the `ft_printf` implementation. The test cases should be placed inside the `tests/` directory.
 
-###copy the bash functions:
+### copy the bash functions:
 ```
 test() {
     if [ ! -d "exec" ]; then
