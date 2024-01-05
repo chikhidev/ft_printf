@@ -77,12 +77,16 @@ To compile and run a test case without using the `libftprintf.a` library, use th
 ```bash
 # Compile and run a test case without the library
 test <test_case_name> 0
+# Compile and run a test case without the library with flags
+test <test_case_name> 1
 ```
 
 To compile and run a test case using the `libftprintf.a` library, use the `testlib` function:
 
 ```bash
 # Compile and run a test case using the library
+testlib <test_case_name> 0
+# Compile and run a test case using the library flags
 testlib <test_case_name> 1
 ```
 
